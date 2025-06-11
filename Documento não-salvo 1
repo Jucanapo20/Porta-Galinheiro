@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porta do Galinheiro Automática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        #porta {
+            width: 100px;
+            height: 200px;
+            margin: 20px auto;
+            background-color: brown;
+            border: 3px solid #654321;
+            transition: transform 1s ease-in-out;
+        }
+        .aberta {
+            transform: translateY(-150px);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Porta do Galinheiro Automática</h1>
+    <p>Status da porta: <span id="status">Fechada</span></p>
+    <div id="porta"></div>
+    <button onclick="abrirPorta()">Abrir</button>
+    <button onclick="fecharPorta()">Fechar</button>
+
+    <script>
+        function isDaytime() {
+            const now = new Date();
+            const hours = now.getHours();
+            return hours >= 6 && hours < 18; // Define amanhecer e pôr do sol
+        }
+
+        function abrirPorta() {
+            document.getElementById("porta").classList.add("aberta");
+            document.getElementById("status").innerText = "Aberta";
+        }
+
+        function fecharPorta() {
+            document.getElementById("porta").classList.remove("aberta");
+            document.getElementById("status").innerText = "Fechada";
+        }
+
+        // Verifica automaticamente se está de dia ou de noite
+        setInterval(() => {
+            if (isDaytime()) {
+                abrirPorta();
+            } else {
+                fecharPorta();
+            }
+        }, 60000); // Verifica a cada minuto
+    </script>
+
+</body>
+</html>
